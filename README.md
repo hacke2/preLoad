@@ -36,17 +36,15 @@ reloadCount: 如果图片请求失败再次请求的次数，默认为0
 
 ```html
 <body id="novelAcheieve">
-	<div data-section="fade" data-res-bg="s_1_1">
+	<div data-res-bg="s_1_1">
 		加载
 		<div id="loading"></div>
 	</div>
-	<div data-section="fade" data-res-bg="s_1_2">
+	<div data-res-bg="s_1_2">
 		第一屏
 	</div>
-	<div data-section="fade" data-res-bg="s_2_4">
+	<div data-res-bg="s_2_4">
 		第二屏
-	</div>
-		第三屏
 	</div>
 </body>
 ```
