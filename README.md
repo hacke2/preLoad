@@ -59,11 +59,12 @@ var IMG_LIST = {
 };
 
 $('#novelAcheieve').preLoading({
-    imgList : IMG_LIST,
-    imgready : function (e, value) {
-        console.log(~~(value * 100))
-    },
-    allready : function(e) {
-    }
+	imgList : IMG_LIST,
+	imgready : function (value) {
+	    console.log(~~(value * 100))
+	},
+	allready : function() {
+		console.log('完成了')
+	}
 });
 ```
