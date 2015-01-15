@@ -11,7 +11,7 @@
 			option = $.extend(defined, opt),
 			$scope = this,
 			count = function(obj) {
-		            var count = 0;
+				var count = 0;
 		            for(var item in obj) {
 		                count ++;
 		            }
@@ -21,13 +21,13 @@
             readyCount = 0,
             noticeReady = function(errorList) {
                 $scope.trigger('allready');
-            };
+            },
+            deferred = $.Deferred();
 
+            deferred.progress(option.imgready);
+            deferred.then(allready).done(option.allready)
 
-	        // 进度显示demo
-		    $scope.on('imgready', option.imgready).on('allready',option.allready);
-	        // 图片加载完成后填充dom
-		    $scope.on('allready', function() {
+		    function allready() {
 		        var $bgs = $('[data-res-bg]'),
 		            $imgs = $('[data-res-img]');
 
@@ -42,8 +42,7 @@
 
 		            $img.attr('src', IMG_LIST[$img.data('res-img')]);
 		        }
-
-		    });
+		    };
 
             if(len) {
                 for(var item in IMG_LIST) {
@@ -61,8 +60,7 @@
                         			errFunc.call(this,e)
                         		})
 
-                        		function errFunc() {
-                        			console.log('尝试重新连接' + IMG_LIST[item]);
+								function errFunc() {
                         			if (--option.reloadCount && !isSuccess) {
 
                         				var _reload = new Image(),
@@ -81,15 +79,17 @@
                         		})
                         		reload.src = IMG_LIST[item];
 	                    	}
-	                        $scope.trigger('imgready', readyCount/len);
-	                        readyCount == len && noticeReady();
+
+	                    	deferred.notify(readyCount/len)
+	                        readyCount == len && deferred.resolve();
+
 	                    }
                     })(item))
                     img.src = IMG_LIST[item];
                 }
             }
             else {
-                noticeReady();
+                deferred.resolve();
             }
             
 			return this;
