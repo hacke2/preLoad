@@ -6,7 +6,7 @@
 				imgList : {},
 				imgready : function(){},
 				allready : function(){},
-				reloadCount : 1
+				reloadCount : 0
 			},
 			option = $.extend(defined, opt),
 			$scope = this,
