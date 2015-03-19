@@ -61,7 +61,7 @@
                                 })
 
                                 function errFunc() {
-                                    if (--option.reloadCount && !isSuccess) {
+                                    if (option.reloadCount-- > 0 && !isSuccess) {
 
                                         var _reload = new Image(),
                                         _$reload = $(_reload);
